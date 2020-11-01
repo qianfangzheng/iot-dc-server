@@ -1,0 +1,19 @@
+server:
+  port: 8200
+
+spring:
+  application:
+    name: @project.artifactId@
+  boot:
+    admin:
+      ui:
+        title: DC3 Monitor Center
+        favicon: images/icon/favicon.ico
+        favicon-danger: images/icon/favicon-danger.ico
+        brand: <img src="images/logo/dc3-logo.png"><span>DC3 Monitor Center</span>
+
+logging:
+  level:
+    com.dc3: DEBUG
+  file:
+    name: dc3/logs/center/${spring.application.name}.log

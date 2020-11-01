@@ -1,0 +1,50 @@
+driver:
+  name: ListeningVirtualDriver
+  description: @project.description@
+  custom:
+    tcp:
+      port: 6270
+    upd:
+      port: 6271
+  schedule:
+    read:
+      enable: false
+      corn: '0/30 * * * * ?'
+    custom:
+      enable: true
+      corn:  '0/5 * * * * ?'
+  point-attribute:
+    - displayName: 关键字
+      name: key
+      type: string
+      value: 62
+      description: 报文关键字
+    - displayName: 起始字节
+      name: start
+      type: int
+      value: 0
+      description: 起始字节，包含该字节
+    - displayName: 结束字节
+      name: end
+      type: int
+      value: 8
+      description: 结束字节，不包含该字节
+    - displayName: 类型
+      name: type
+      type: string
+      value: string
+      description: 解析类型，short、int、long、float、double、boolean、string
+
+server:
+  port: 8700
+
+spring:
+  application:
+    name: @project.artifactId@
+
+logging:
+  level:
+    com.dc3.common.sdk: DEBUG
+    com.dc3: DEBUG
+  file:
+    name: dc3/logs/driver/listeningVirtual/${spring.application.name}.log

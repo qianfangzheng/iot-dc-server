@@ -1,0 +1,75 @@
+#
+#  Copyright 2018-2020 Pnoker. All Rights Reserved.
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+#
+
+### --------------------- Point ---------------------
+### 分页查询 Point Value
+#/data/list
+POST http://localhost:8500/data/list
+Accept: */*
+Content-Type: application/json
+Cache-Control: no-cache
+
+{
+  "deviceId": "1",
+  "pointId": "1",
+  "page": {
+    "current": 1
+  }
+}
+
+
+### 根据 Device Id 查询 最新值
+#/latest/deviceId/:deviceId
+GET http://localhost:8500/data/latest/deviceId/1
+Accept: */*
+Cache-Control: no-cache
+
+
+### 根据 Device Id 和 Point Id 查询 最新值
+#/latest/deviceId/:deviceId/pointId/:pointId
+GET http://localhost:8500/data/latest/deviceId/1/pointId/1
+Accept: */*
+Cache-Control: no-cache
+
+
+### 根据 Device Id 查询 设备状态
+#/latest/deviceId/:deviceId
+GET http://localhost:8500/data/status/deviceId/1
+Accept: */*
+Cache-Control: no-cache
+
+
+### 根据 Device Id 查询 实时值
+#/realtime/deviceId/:deviceId
+GET http://localhost:8500/data/realtime/deviceId/1
+Accept: */*
+Cache-Control: no-cache
+
+
+### 根据 Device Id 和 Point Id 查询 实时值
+#/realtime/deviceId/:deviceId/pointId/:pointId
+GET http://localhost:8500/data/realtime/deviceId/1/pointId/1
+Accept: */*
+Cache-Control: no-cache
+
+
+### 数据纠正
+#/correct/serviceName/:serviceName
+GET http://localhost:8500/data/correct/serviceName/dc3-driver-water-188b
+Accept: */*
+Cache-Control: no-cache
+
+###

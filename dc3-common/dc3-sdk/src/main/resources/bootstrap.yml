@@ -1,0 +1,104 @@
+server:
+  undertow:
+    threads:
+      io: 2
+      worker: 20
+    buffer-size: 512
+  thread:
+    prefix: dc3-thread-
+    core-pool-size: 4
+    maximum-pool-size: 1024
+    keep-alive-time: 10
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+  security:
+    user:
+      name: dc3
+      password: dc3
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+      cache:
+        caffeine:
+          spec: initialCapacity=10,maximumSize=500,expireAfterAccess=600s
+  rabbitmq:
+    virtual-host: dc3
+    host: dc3-rabbitmq
+    port: 5672
+    username: dc3
+    password: dc3
+    publisher-confirm-type: correlated
+    publisher-returns: true
+    listener:
+      simple:
+        acknowledge-mode: manual
+        retry:
+          enabled: true
+  quartz:
+    properties:
+      org.quartz:
+        scheduler:
+          instanceName: DriverQuartzScheduler
+          instanceId: AUTO
+        threadPool:
+          threadsInheritContextClassLoaderOfInitializingThread: true
+          class: org.quartz.simpl.SimpleThreadPool
+          threadPriority: 5
+          threadCount: 50
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+feign:
+  hystrix:
+    enabled: false
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
+  compression:
+    request:
+      enabled: true
+    response:
+      enabled: true
+      use-gzip-decoder: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+  threadpool:
+    default:
+      coreSize: 1024
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    status-page-url-path: /actuator/info
+    health-check-url-path: /actuator/health
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 15
+  client:
+    region: dc3
+    availability-zones:
+      dc3: defaultZone
+    prefer-same-zone-eureka: true
+    registry-fetch-interval-seconds: 5
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@dc3-register:8100/eureka/

@@ -1,0 +1,10 @@
+*target
+*logs
+.idea
+*.iws
+*.iml
+*.ipr
+.vs
+.vscode
+.settings
+.project

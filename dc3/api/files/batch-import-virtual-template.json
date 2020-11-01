@@ -1,0 +1,120 @@
+[
+  {
+    "serviceName": "dc3-driver-virtual",
+    "profiles": [
+      {
+        "name": "Virtual-Profile",
+        "share": false,
+        "driverConfig": {
+          "host": "localhost",
+          "port": "9000"
+        },
+        "points": [
+          {
+            "name": "Virtual-Point-String",
+            "type": "string",
+            "rw": 0,
+            "base": 0,
+            "minimum": -999999,
+            "maximum": 999999,
+            "multiple": 1,
+            "accrue": false,
+            "format": "%.3f",
+            "unit": "-"
+          },
+          {
+            "name": "Virtual-Point-Boolean",
+            "type": "boolean",
+            "rw": 0,
+            "base": 0,
+            "minimum": -999999,
+            "maximum": 999999,
+            "multiple": 1,
+            "accrue": false,
+            "format": "%.3f",
+            "unit": "-"
+          },
+          {
+            "name": "Virtual-Point-Int",
+            "type": "int",
+            "rw": 0,
+            "base": 0,
+            "minimum": -999999,
+            "maximum": 999999,
+            "multiple": 1,
+            "accrue": false,
+            "format": "%.3f",
+            "unit": "-"
+          },
+          {
+            "name": "Virtual-Point-Long",
+            "type": "long",
+            "rw": 0,
+            "base": 0,
+            "minimum": -999999,
+            "maximum": 999999,
+            "multiple": 1,
+            "accrue": false,
+            "format": "%.3f",
+            "unit": "-"
+          },
+          {
+            "name": "Virtual-Point-Float",
+            "type": "float",
+            "rw": 0,
+            "base": 0,
+            "minimum": -999999,
+            "maximum": 999999,
+            "multiple": 1,
+            "accrue": false,
+            "format": "%.3f",
+            "unit": "-"
+          },
+          {
+            "name": "Virtual-Point-Double",
+            "type": "double",
+            "rw": 0,
+            "base": 0,
+            "minimum": -999999,
+            "maximum": 999999,
+            "multiple": 1,
+            "accrue": false,
+            "format": "%.3f",
+            "unit": "-"
+          }
+        ],
+        "groups": [
+          {
+            "name": "Virtual-Group",
+            "devices": [
+              {
+                "name": "Virtual-Device",
+                "multi": false,
+                "pointConfig": {
+                  "Virtual-Point-String": {
+                    "tag": "tag-string"
+                  },
+                  "Virtual-Point-Boolean": {
+                    "tag": "tag-boolean"
+                  },
+                  "Virtual-Point-Int": {
+                    "tag": "tag-int"
+                  },
+                  "Virtual-Point-Long": {
+                    "tag": "tag-long"
+                  },
+                  "Virtual-Point-Float": {
+                    "tag": "tag-float"
+                  },
+                  "Virtual-Point-Double": {
+                    "tag": "tag-double"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

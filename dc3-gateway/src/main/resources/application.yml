@@ -1,0 +1,106 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: @project.artifactId@
+  main:
+    allow-bean-definition-overriding: true
+  thymeleaf:
+    cache: false
+    enabled: true
+    check-template: true
+    mode: HTML
+    encoding: UTF-8
+    prefix: classpath:/templates/
+    suffix: .html
+    servlet:
+      content-type: text/html
+  redis:
+    database: 0
+  cache:
+    redis:
+      time-to-live: 60S
+  cloud:
+    gateway:
+      loadbalancer:
+        use404: true
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        # auth
+        - id: auth_route
+          uri: lb://dc3-auth
+          predicates:
+            - Path=/api/v3/auth/user/**,/api/v3/auth/blackIp/**
+          filters:
+            - StripPrefix=2
+            - Authentic
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@hostKeyResolver}'
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+            - name: Hystrix
+              args:
+                name: default
+                fallbackUri: 'forward:/fallback'
+        # manager
+        - id: manager_route
+          uri: lb://dc3-manager
+          predicates:
+            - Path=/api/v3/manager/**
+          filters:
+            - StripPrefix=2
+            - Authentic
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@hostKeyResolver}'
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+            - name: Hystrix
+              args:
+                name: default
+                fallbackUri: 'forward:/fallback'
+        # data
+        - id: data_route
+          uri: lb://dc3-data
+          predicates:
+            - Path=/api/v3/data/**
+          filters:
+            - StripPrefix=2
+            - Authentic
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@hostKeyResolver}'
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+            - name: Hystrix
+              args:
+                name: default
+                fallbackUri: 'forward:/fallback'
+        # rtmp
+        - id: rtmp_route
+          uri: lb://dc3-rtmp
+          predicates:
+            - Path=/api/v3/rtmp/**
+          filters:
+            - StripPrefix=2
+            - Authentic
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@hostKeyResolver}'
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+            - name: Hystrix
+              args:
+                name: default
+                fallbackUri: 'forward:/fallback'
+
+logging:
+  level:
+    com.dc3: DEBUG
+  file:
+    name: dc3/logs/${spring.application.name}.log

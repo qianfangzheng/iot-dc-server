@@ -1,0 +1,56 @@
+driver:
+  name: PlcS7Driver
+  description: @project.description@
+  schedule:
+    read:
+      enable: true
+      corn: '0/30 * * * * ?'
+    custom:
+      enable: true
+      corn:  '0/5 * * * * ?'
+  driver-attribute:
+    - displayName: 主机
+      name: host
+      type: string
+      value: 192.168.0.20
+      description: Ip
+    - displayName: 端口
+      name: port
+      type: int
+      value: 102
+      description: Port
+  point-attribute:
+    - displayName: DB序号
+      name: dbNum
+      type: int
+      value: 0
+      description: 数据块号，从 0 开始计数
+    - displayName: 字偏移
+      name: byteOffset
+      type: int
+      value: 0
+      description: 字偏移
+    - displayName: 位偏移
+      name: bitOffset
+      type: int
+      value: 0
+      description: 位偏移
+    - displayName: 数据块长度
+      name: blockSize
+      type: int
+      value: 8
+      description: 数据块长度
+
+server:
+  port: 8601
+
+spring:
+  application:
+    name: @project.artifactId@
+
+logging:
+  level:
+    com.dc3.common.sdk: DEBUG
+    com.dc3: DEBUG
+  file:
+    name: dc3/logs/driver/plcs7/${spring.application.name}.log

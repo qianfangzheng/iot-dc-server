@@ -1,0 +1,126 @@
+#
+#  Copyright 2018-2020 Pnoker. All Rights Reserved.
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+#
+
+version: '3'
+
+services:
+
+  register:
+    image: registry.cn-beijing.aliyuncs.com/dc3/dc3-register:demo
+    restart: always
+    container_name: dc3-register
+    hostname: dc3-register
+    networks:
+      demo_net:
+        aliases:
+          - dc3-register
+
+  mysql:
+    image: registry.cn-beijing.aliyuncs.com/dc3/dc3-mysql:demo
+    restart: always
+    container_name: dc3-mysql
+    hostname: dc3-mysql
+    networks:
+      demo_net:
+        aliases:
+          - dc3-mysql
+
+  redis:
+    image: registry.cn-beijing.aliyuncs.com/dc3/dc3-redis:demo
+    restart: always
+    container_name: dc3-redis
+    hostname: dc3-redis
+    networks:
+      demo_net:
+        aliases:
+          - dc3-redis
+
+  auth:
+    image: registry.cn-beijing.aliyuncs.com/dc3/dc3-auth:demo
+    restart: always
+    container_name: dc3-auth
+    hostname: dc3-auth
+    networks:
+      demo_net:
+        aliases:
+          - dc3-auth
+
+  manager:
+    image: registry.cn-beijing.aliyuncs.com/dc3/dc3-manager:demo
+    restart: always
+    container_name: dc3-manager
+    hostname: dc3-manager
+    networks:
+      demo_net:
+        aliases:
+          - dc3-manager
+
+  mongo:
+    image: registry.cn-beijing.aliyuncs.com/dc3/dc3-mongo:demo
+    restart: always
+    container_name: dc3-mongo
+    hostname: dc3-mongo
+    networks:
+      demo_net:
+        aliases:
+          - dc3-mongo
+
+  rabbitmq:
+    image: registry.cn-beijing.aliyuncs.com/dc3/dc3-rabbitmq:demo
+    restart: always
+    container_name: dc3-rabbitmq
+    hostname: dc3-rabbitmq
+    networks:
+      demo_net:
+        aliases:
+          - dc3-rabbitmq
+
+  data:
+    image: registry.cn-beijing.aliyuncs.com/dc3/dc3-data:demo
+    restart: always
+    container_name: dc3-data
+    hostname: dc3-data
+    networks:
+      demo_net:
+        aliases:
+          - dc3-data
+
+  virtual:
+    image: registry.cn-beijing.aliyuncs.com/dc3/dc3-driver-virtual:demo
+    restart: always
+    container_name: dc3-driver-virtual
+    hostname: dc3-driver-virtual
+    networks:
+      demo_net:
+        aliases:
+          - dc3-driver-virtual
+
+  web:
+    image: registry.cn-beijing.aliyuncs.com/dc3/dc3-web:demo
+    restart: always
+    ports:
+      - 443:443
+    container_name: dc3-web
+    hostname: dc3-web
+    networks:
+      demo_net:
+        aliases:
+          - dc3-web
+
+networks:
+  demo_net:
+    driver: 'bridge'
+...

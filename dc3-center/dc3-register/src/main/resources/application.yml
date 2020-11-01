@@ -1,0 +1,23 @@
+server:
+  port: 8100
+
+spring:
+  application:
+    name: @project.artifactId@
+
+logging:
+  level:
+    com.dc3: DEBUG
+  file:
+    name: dc3/logs/center/${spring.application.name}.log
+
+eureka:
+  instance:
+    hostname: dc3-register
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+  server:
+    eviction-interval-timer-in-ms: 4000
+    enable-self-preservation: false
+    renewal-percent-threshold: 0.9

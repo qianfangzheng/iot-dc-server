@@ -1,0 +1,28 @@
+rtmp:
+  ffmpeg:
+    window: D:/Documents/FFmpeg/bin/ffmpeg.exe
+    unix: /usr/local/bin/ffmpeg
+
+server:
+  port: 8803
+
+spring:
+  application:
+    name: @project.artifactId@
+  main:
+    allow-bean-definition-overriding: true
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+  redis:
+    database: 2
+  cache:
+    redis:
+      time-to-live: 60S
+
+logging:
+  level:
+    com.dc3: DEBUG
+  file:
+    name: dc3/logs/transfer/${spring.application.name}.log
