@@ -1,4 +1,4 @@
- :rocket: 项目文档请阅读 [`IOT DC3 Wiki`](https://doc.dc3.site) ！
+
 
  :boom:  你的 `Star` 是我开发的动力，下载源码 `git clone https://github.com/qianfangzheng/iot-dc-server.git` ！ 
 
@@ -67,7 +67,7 @@
   
   *备注：项目目前没有管理平台，处于规划和收集建议阶段* ；
   
-  *为了便于二次开发和理解整体框架，`DC3` 提供了一个基于后台接口开发的  `Demo UI` 可供参考，详情请阅读  https://github.com/qianfangzheng/iot-dc-client。*
+  *为了便于二次开发和理解整体框架，`DC3` 提供了一个基于后台接口开发的  `Demo UI` 可供参考，详情请阅读  https://github.com/qianfangzheng/iot-dc-client
   
 - **开源版本的规划**
 
